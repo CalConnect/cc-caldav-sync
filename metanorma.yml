@@ -2,10 +2,10 @@
 metanorma:
   source:
     files:
-      - sources/cc-51008/document.adoc
-      - sources/ietf/document.adoc
-      - sources/iso-51008/document.adoc
+      - sources/cc-51012.adoc
+      - sources/draft-daboo-caldav-sync-00.adoc
 
   collection:
-    name: vObject and vFormat
+    name: Enhanced Synchronization for Calendaring Extensions to WebDAV (CalDAV)
     organization: CalConnect
+

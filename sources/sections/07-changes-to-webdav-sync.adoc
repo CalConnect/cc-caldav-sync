@@ -1,0 +1,78 @@
+== Changes to WebDAV Sync Collection `REPORT` requests
+
+A client fetching the `CALDAV:calendar-data` "property" in a `DAV:sync-collection`
+`REPORT` can signal to a server that it is willing and able to receive calendar
+patch documents rather than entire calendar resources by including a Prefer header
+field with the "calendar-patch" preference in the `REPORT` request. The value of the
+sync-token specified in the Prefer request header field `MUST` match that of the
+`DAV:sync-token` element in the `REPORT` body.
+
+If a server receives a "calendar-patch" preference, recognizes the supplied
+sync-token, and is able to create patch documents for resources in a format
+compatible with the "content-type" attribute of the `CALDAV:calendar-data` element,
+the server `MAY` respond to the request with patch documents in lieu of entire
+resources. If a resource has not changed since the state indicated by the
+sync-token, the server `MAY` respond with a 304 (Not Modified) status code in the
+`DAV:propstat` element containing the `CALDAV:calendar-data` element in lieu of an
+empty calendar patch document.
+
+[example]
+====
+[source%unnumbered]
+----
+>> Request <<
+
+REPORT /events/work/ HTTP/1.1
+Host: cal.example.com
+Content-Type: text/xml; charset="utf-8"
+Content-Length: xxxx
+Prefer: calendar-patch; since="http://example.com/ns/sync/1234"
+
+<?xml version="1.0" encoding="utf-8" ?>
+<D:sync-collection xmlns:D="DAV:"
+                   xmlns:C="urn:ietf:params:xml:ns:caldav">
+  <D:sync-token>http://example.com/ns/sync/1234</D:sync-token>
+  <D:sync-level>1</D:sync-level>
+  <D:prop>
+    <D:getetag/>
+    <C:calendar-data content-type="text/calendar; component=VPATCH"/>
+  </D:prop>
+</D:sync-collection>
+
+>> Response <<
+
+HTTP/1.1 207 Multi-Status
+Date: Sat, 11 Feb 2017 09:32:12 GMT
+Content-Type: application/xml; charset="utf-8"
+Content-Length: xxxx
+
+<?xml version="1.0" encoding="utf-8" ?>
+<D:multistatus xmlns:D="DAV:"
+               xmlns:C="urn:ietf:params:xml:ns:caldav">
+  <D:response>
+    <D:href>http://cal.example.com/events/work/abcd1.ics</D:href>
+    <D:propstat>
+      <D:prop>
+        <D:getetag>"fffff-abcd1"</D:getetag>
+        <C:calendar-data>BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Example Corp.//CalDAV Client//EN
+BEGIN:VPATCH
+UID:qrst
+DTSTAMP:20170201T000000Z
+BEGIN:PATCH
+PATCH-TARGET:/VCALENDAR/VEVENT[UID=abcd1]
+ATTENDEE;PATCH-ACTION=BYVALUE;PARTSTAT=ACCEPTED:
+ mailto:cyrus@example.com
+END:PATCH
+END:VPATCH
+END:VCALENDAR
+        </C:calendar-data>
+      </D:prop>
+      <D:status>HTTP/1.1 200 OK</D:status>
+    </D:propstat>
+  </D:response>
+  <D:sync-token>http://example.com/ns/sync/1238</D:sync-token>
+</D:multistatus>
+----
+====

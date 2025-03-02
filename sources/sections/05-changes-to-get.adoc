@@ -1,0 +1,49 @@
+== Changes to `GET` requests
+
+A client can signal to a server that it is willing and able to receive a calendar
+patch document rather than an entire calendar resource by including a Prefer header
+field with the "calendar-patch" preference in a `GET` request.
+
+If a server receives a "calendar-patch" preference, recognizes the supplied
+sync-token, and is able to create a patch document for the resource in a format
+compatible with one of the media types supplied in the Accept <<RFC7230>> request
+header field, the server `MAY` respond to the request with the patch document in lieu
+of the entire resource.
+
+[example]
+====
+[source%unnumbered]
+----
+>> Request <<
+
+GET /events/abcd.ics HTTP/1.1
+Host: cal.example.com
+Prefer: calendar-patch; since="http://example.com/ns/sync/1234"
+Accept: text/calendar; component=VPATCH
+
+>> Response <<
+
+HTTP/1.1 200 OK
+Date: Sat, 11 Feb 2017 09:32:12 GMT
+Content-Type: text/calendar; component=VPATCH; charset="utf-8"
+Content-Length: yyyy
+
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Example Corp.//CalDAV Server//EN
+BEGIN:VPATCH
+UID:wxyz
+DTSTAMP:20170201T000000Z
+BEGIN:PATCH
+PATCH-TARGET:/VCALENDAR/VEVENT[UID=abcd]
+BEGIN:VALARM
+UID:hijk
+ACTION:DISPLAY
+TRIGGER:-PT30M
+DESCRIPTION:Time to leave
+END:VALARM
+END:PATCH
+END:VPATCH
+END:VCALENDAR
+----
+====
