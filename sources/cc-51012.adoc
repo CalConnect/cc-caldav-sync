@@ -1,0 +1,50 @@
+= Enhanced Synchronization for Calendaring Extensions to WebDAV (CalDAV)
+:docnumber: 51012
+:copyright-year: 2017
+:language: en
+:doctype: standard
+:edition: 1
+:status: working-draft
+:revdate: 2017-02-12
+:published-date: 2017-02-12
+:technical-committee: CALENDAR
+:fullname: Cyrus Daboo
+:givenname: Cyrus
+:surname: Daboo
+:affiliation: Apple Inc.
+:fullname_2: Kenneth Murchison
+:givenname_2: Kenneth
+:surname_2: Murchison
+:affiliation_2: Carnegie Mellon University
+:mn-document-class: cc
+:mn-output-extensions: xml,html,pdf,rxl
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-abstract.adoc[]
+
+include::sections/01-intro.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/12-references.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/03-overview.adoc[]
+
+include::sections/04-calendar-patch.adoc[]
+
+include::sections/05-changes-to-get.adoc[]
+
+include::sections/06-changes-to-caldav-report.adoc[]
+
+include::sections/07-changes-to-webdav-sync.adoc[]
+
+include::sections/08-security.adoc[]
+
+include::sections/09-privacy.adoc[]
+
+include::sections/10-iana.adoc[]
+
+include::sections/11-acknowledgments.adoc[]

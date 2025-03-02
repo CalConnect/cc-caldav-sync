@@ -1,4 +1,4 @@
-= CalConnect Standard: (TITLE)
+= CalConnect Standard: Enhanced Synchronization for Calendaring Extensions to WebDAV (CalDAV)
 
 This work item belongs to CalConnect (TCs).
 
@@ -6,17 +6,16 @@ image:https://github.com/CalConnect/cc-caldav-sync/workflows/generate/badge.svg[
 
 This document is available in its rendered forms here:
 
-* https://calconnect.github.io/cc-caldav-sync/[CalConnect: Calendaring and scheduling -- Vocabulary (HTML)]
+* https://calconnect.github.io/cc-caldav-sync/[CalConnect: Enhanced Synchronization for CalDAV (HTML)]
 
 == General
 
-This document specifies the (TITLE).
+This document defines new protocol features for CalDAV (RFC 4791) to improve the efficiency of synchronizing data changes between a client and server.
 
 The document is published as the following:
 
-* CalConnect CC (DOCNUMBER)
-* ISO (DOCNUMBER)
-* IETF draft-cc-caldav-sync
+* CalConnect CC 51012
+* IETF draft-daboo-caldav-sync-00
 
 
 == Fetching the document
@@ -62,17 +61,6 @@ The generated documents are accessible under `_site/`.
 metanorma site generate --agree-to-terms
 open _site/index.html
 ----
-
-
-// == IETF: Checking against idnits
-
-// https://tools.ietf.org/tools/idnits/[idnits] is the RFC checking tool prior to
-// submissions.
-
-// [source,sh]
-// ----
-// idnits draft-calconnect-vobject-vformat.nits
-// ----
 
 
 == License
