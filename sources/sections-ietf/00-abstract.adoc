@@ -6,6 +6,6 @@ efficiency of synchronizing data changes between a client and server.
 
 [NOTE,title=Open Issues]
 ====
-* Should the "since" parameter to the "calendar-patch" preference be optional when
-used with DAV:sync-collection REPORT?
+* Should the "since" parameter to the "calendar-patch" preference be optional
+when used with DAV:sync-collection REPORT?
 ====

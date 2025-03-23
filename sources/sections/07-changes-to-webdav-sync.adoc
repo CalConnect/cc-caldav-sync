@@ -1,20 +1,21 @@
 == Changes to WebDAV Sync Collection `REPORT` requests
 
-A client fetching the `CALDAV:calendar-data` "property" in a `DAV:sync-collection`
-`REPORT` can signal to a server that it is willing and able to receive calendar
-patch documents rather than entire calendar resources by including a Prefer header
-field with the "calendar-patch" preference in the `REPORT` request. The value of the
-sync-token specified in the Prefer request header field `MUST` match that of the
-`DAV:sync-token` element in the `REPORT` body.
+A client fetching the `CALDAV:calendar-data` "property" in a
+`DAV:sync-collection` `REPORT` can signal to a server that it is willing and
+able to receive calendar patch documents rather than entire calendar resources
+by including a Prefer header field with the "calendar-patch" preference in the
+`REPORT` request. The value of the sync-token specified in the Prefer request
+header field `MUST` match that of the `DAV:sync-token` element in the `REPORT`
+body.
 
 If a server receives a "calendar-patch" preference, recognizes the supplied
 sync-token, and is able to create patch documents for resources in a format
-compatible with the "content-type" attribute of the `CALDAV:calendar-data` element,
-the server `MAY` respond to the request with patch documents in lieu of entire
-resources. If a resource has not changed since the state indicated by the
-sync-token, the server `MAY` respond with a 304 (Not Modified) status code in the
-`DAV:propstat` element containing the `CALDAV:calendar-data` element in lieu of an
-empty calendar patch document.
+compatible with the "content-type" attribute of the `CALDAV:calendar-data`
+element, the server `MAY` respond to the request with patch documents in lieu of
+entire resources. If a resource has not changed since the state indicated by the
+sync-token, the server `MAY` respond with a 304 (Not Modified) status code in
+the `DAV:propstat` element containing the `CALDAV:calendar-data` element in lieu
+of an empty calendar patch document.
 
 [example]
 ====

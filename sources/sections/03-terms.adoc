@@ -1,13 +1,14 @@
 == Terms and Definitions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document
-are to be interpreted as described in <<RFC2119>>.
+"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in <<RFC2119>>.
 
-The notation used in this memo is the ABNF notation of <<RFC5234>>. Any syntax elements
-shown below that are not explicitly defined in this specification come from HTTP and
-CalDAV.
+The notation used in this memo is the ABNF notation of <<RFC5234>>. Any syntax
+elements shown below that are not explicitly defined in this specification come
+from HTTP and CalDAV.
 
-When XML element types in the namespaces "DAV:" and "urn:ietf:params:xml:ns:caldav"
-are referenced in this document outside of the context of an XML fragment, the string
-"DAV:" and "CALDAV:" will be prefixed to the element type names respectively.
+When XML element types in the namespaces "DAV:" and
+"urn:ietf:params:xml:ns:caldav" are referenced in this document outside of the
+context of an XML fragment, the string "DAV:" and "CALDAV:" will be prefixed to
+the element type names respectively.

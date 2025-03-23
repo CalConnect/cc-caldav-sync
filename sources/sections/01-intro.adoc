@@ -3,28 +3,31 @@
 The CalDAV <<RFC4791>> protocol is a client/server protocol that supports the
 exchange of iCalendar <<RFC5545>> data between a server and clients, as well as
 supporting scheduling operations on the server (using <<RFC6638>>). To exchange
-data, clients and servers use a combination of HTTP `PUT`, `GET` and `REPORT` requests.
-The REPORT requests include CalDAV "multiget" and "time-range" queries, as well as
-WebDAV-based synchronization <<RFC6578>>. Whilst these have proved adequate to date,
-there is a need to improve the efficiency of data synchronization to lower network
-I/O requirements, and thus reduce power consumption requirements on mobile devices
-(which are now frequently used to manage calendars).
+data, clients and servers use a combination of HTTP `PUT`, `GET` and `REPORT`
+requests. The REPORT requests include CalDAV "multiget" and "time-range"
+queries, as well as WebDAV-based synchronization <<RFC6578>>. Whilst these have
+proved adequate to date, there is a need to improve the efficiency of data
+synchronization to lower network I/O requirements, and thus reduce power
+consumption requirements on mobile devices (which are now frequently used to
+manage calendars).
 
 The iCalendar patch [draft-patch] specification defines a way for clients to
 incrementally update servers using the HTTP PATCH <<RFC5789>> method and a new
 iCalendar-based patch format. This allows a client to only send the pieces of an
-iCalendar object that have changed, rather than send the entire resource. This can
-significantly reduce the amount of data sent from the client to the server,
-particularly in enterprise environments where long-lived recurring events, with many
-attendees, and many recurrence exceptions are common. However, when data changes on
-the server, clients are still required to download the entire calendar resource,
-even when only a small change has taken place. Since many users now have multiple
-devices that are actively synchronizing with a server (e.g., desktop, laptop, mobile
-phone, tablet, etc) a small change made on one device will result in large data
-transfers on the others as they synchronize their local caches.
+iCalendar object that have changed, rather than send the entire resource. This
+can significantly reduce the amount of data sent from the client to the server,
+particularly in enterprise environments where long-lived recurring events, with
+many attendees, and many recurrence exceptions are common. However, when data
+changes on the server, clients are still required to download the entire
+calendar resource, even when only a small change has taken place. Since many
+users now have multiple devices that are actively synchronizing with a server
+(e.g., desktop, laptop, mobile phone, tablet, etc) a small change made on one
+device will result in large data transfers on the others as they synchronize
+their local caches.
 
-This specification defines new protocol features in CalDAV to support incremental
-updates to data stored in a client's cache, by sending calendar patch data from the
-server to the client. These features are intended to be data format agnostic, and
-can be used with iCalendar patch, and future patch formats whether they be for
-existing (e.g. jCal <<RFC7265>>, xCal <<RFC6321>>) or new calendar data formats.
+This specification defines new protocol features in CalDAV to support
+incremental updates to data stored in a client's cache, by sending calendar
+patch data from the server to the client. These features are intended to be data
+format agnostic, and can be used with iCalendar patch, and future patch formats
+whether they be for existing (e.g. jCal <<RFC7265>>, xCal <<RFC6321>>) or new
+calendar data formats.

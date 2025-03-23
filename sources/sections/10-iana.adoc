@@ -1,15 +1,19 @@
 == IANA Considerations
 
-The following preference is to be added to the HTTP Preferences Registry defined in
-<<RFC7240,section=5.1>>.
+The following preference is to be added to the HTTP Preferences Registry defined
+in <<RFC7240,section=5.1>>.
 
 Preference:: `calendar-patch`
+
 Parameters:: `since = <sync-token>`
+
 Description:: The "`calendar-patch`" preference indicates that the client wishes for the
 server to use calendar patch documents in the HTTP response rather than entire
 calendar resources. The value of the "since" parameter provides the anchor point from
 which the server should generate the patch documents.
+
 Reference:: RFCXXXX, <<cls-4>>
+
 Notes:: This preference is only intended to be used with CalDAV requests that expect
 calendar data to be included in the response. Furthermore, the "since" parameter is
 `REQUIRED` with this preference.

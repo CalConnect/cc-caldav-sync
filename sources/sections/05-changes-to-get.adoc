@@ -1,14 +1,14 @@
 == Changes to `GET` requests
 
-A client can signal to a server that it is willing and able to receive a calendar
-patch document rather than an entire calendar resource by including a Prefer header
-field with the "calendar-patch" preference in a `GET` request.
+A client can signal to a server that it is willing and able to receive a
+calendar patch document rather than an entire calendar resource by including a
+Prefer header field with the "calendar-patch" preference in a `GET` request.
 
 If a server receives a "calendar-patch" preference, recognizes the supplied
 sync-token, and is able to create a patch document for the resource in a format
-compatible with one of the media types supplied in the Accept <<RFC7230>> request
-header field, the server `MAY` respond to the request with the patch document in lieu
-of the entire resource.
+compatible with one of the media types supplied in the Accept <<RFC7230>>
+request header field, the server `MAY` respond to the request with the patch
+document in lieu of the entire resource.
 
 [example]
 ====
