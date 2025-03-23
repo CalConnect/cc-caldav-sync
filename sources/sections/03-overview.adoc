@@ -1,33 +1,37 @@
 == Overview
 
-Synchronization of CalDAV data on a client is nowadays typically accomplished using the
-WebDAV sync REPORT to detect changes to individual calendar object resources in a
-calendar collection. Those can be retrieved by the WebDAV sync request itself, or a
-subsequent series of CalDAV multiget requests can be made to retrieve the changed data.
-WebDAV sync defines a `DAV:sync-token` property on collections that support
-synchronization. The value of that property is an opaque token that serves as a "sync
-anchor" for retrieval of changes on the server. Each client that maintains a local
-cache of the data stores the last value of `DAV:sync-token` for a fully synchronized
-calendar collection, and then presents that token to the server the next time changes
-need to be fetched. The server then uses that token to determine what has changed since
-the client last synchronized, and can return those changes. Since the `DAV:sync-token` is
-already being used to track changes on a collection level, it can also be used as a
-"sync anchor" for the retrieval of incremental changes to the resources within that
-collection.
+Synchronization of CalDAV data on a client is nowadays typically accomplished
+using the WebDAV sync REPORT to detect changes to individual calendar object
+resources in a calendar collection. Those can be retrieved by the WebDAV sync
+request itself, or a subsequent series of CalDAV multiget requests can be made
+to retrieve the changed data. WebDAV sync defines a `DAV:sync-token` property on
+collections that support synchronization. The value of that property is an
+opaque token that serves as a "sync anchor" for retrieval of changes on the
+server. Each client that maintains a local cache of the data stores the last
+value of `DAV:sync-token` for a fully synchronized calendar collection, and then
+presents that token to the server the next time changes need to be fetched. The
+server then uses that token to determine what has changed since the client last
+synchronized, and can return those changes. Since the `DAV:sync-token` is
+already being used to track changes on a collection level, it can also be used
+as a "sync anchor" for the retrieval of incremental changes to the resources
+within that collection.
 
 This specification makes the following changes to CalDAV (with details of each
 described in subsequent sections):
 
-* HTTP requests that expect calendar data to be included in the response (`GET` and
-``REPORT``s which include the `CALDAV:calendar-data` "property" in the XML body) can include
-a Prefer request header field <<RFC7240>> with the "calendar-patch" preference. The
-client sets the value of the "since" parameter of this preference to a `DAV:sync-token`
-value. When such a request is received by the server, if the "since" value represents a
-valid "sync anchor", the server `MAY` use calendar patch documents in the HTTP response.
-Those documents represent the difference between each calendar resource as it was at
-the time the client-provided "sync anchor" was in effect, and the current state of the
+
+* HTTP requests that expect calendar data to be included in the response (`GET`
+and ``REPORT``s which include the `CALDAV:calendar-data` "property" in the XML
+body) can include a Prefer request header field <<RFC7240>> with the
+"calendar-patch" preference. The client sets the value of the "since" parameter
+of this preference to a `DAV:sync-token` value. When such a request is received
+by the server, if the "since" value represents a valid "sync anchor", the server
+`MAY` use calendar patch documents in the HTTP response. Those documents
+represent the difference between each calendar resource as it was at the time
+the client-provided "sync anchor" was in effect, and the current state of the
 resource.
-* HTTP multi-status responses that include calendar patch documents `MAY` use a 304 (Not
-Modified) status code inside a `DAV:propstat` element containing a `CALDAV:calendar-data`
-element to indicate that there is no difference between the current state of the
-resource and the state indicated by the "sync anchor".
+
+* HTTP multi-status responses that include calendar patch documents `MAY` use a
+304 (Not Modified) status code inside a `DAV:propstat` element containing a
+`CALDAV:calendar-data` element to indicate that there is no difference between
+the current state of the resource and the state indicated by the "sync anchor".

@@ -1,11 +1,11 @@
 [[cls-4]]
 == The "calendar-patch" Preference
 
-The "calendar-patch" preference indicates that the client wishes for the server to use
-calendar patch documents in the HTTP response rather than entire calendar resources.
-The value of the "since" parameter, which `MUST` be the value of a previously returned
-`DAV:sync-token` property, provides the "sync anchor" from which the server should
-generate the patch documents.
+The "calendar-patch" preference indicates that the client wishes for the server
+to use calendar patch documents in the HTTP response rather than entire calendar
+resources. The value of the "since" parameter, which `MUST` be the value of a
+previously returned `DAV:sync-token` property, provides the "sync anchor" from
+which the server should generate the patch documents.
 
 ABNF:
 

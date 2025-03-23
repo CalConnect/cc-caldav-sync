@@ -1,4 +1,4 @@
 == Scope
 
-//This document specifies protocol features for CalDAV to improve the efficiency of
-//synchronizing data changes between a client and server.
+This document specifies protocol features for CalDAV to improve the efficiency
+of synchronizing data changes between a client and server.
